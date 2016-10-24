@@ -10,13 +10,15 @@ const ControlTab=React.createClass({
 		this.context.listen("selection",this.onSelection,this);
 	}
 	,onSelection:function(opts){
-		console.log(opts.corpus,opts.article,opts.range);
+		//receive selection from corpus view
+		//moved to this.props.store
+		this.props.store.setSelection(opts.corpus,opts.article,opts.range);
 	}
 	,componentWillUnmount:function(){
 		this.context.unlistenAll(this);
 	}
 	,onlink:function(e){
-		this.context.action("makelink");
+		this.props.store.makelink();
 	}
 	,render:function(){
 		return E("div",{},"Corpus Bind",
